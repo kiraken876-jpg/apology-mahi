@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Mystic Apology Across 14,000,605 Timelines ✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,700;0,800;1,600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            nunito: ['Nunito', 'sans-serif'],
+            script: ['"Dancing Script"', 'cursive'],
+          },
+          colors: {
+            portalGold: '#f59e0b',
+            portalSparks: '#fbbf24',
+            timeEmerald: '#10b981',
+            zenitsuYellow: '#facc15',
+            zenitsuOrange: '#fb923c',
+            mysticPurple: '#1e1035',
+            mysticNavy: '#0c0a1a',
+            dazaiSand: '#fde68a',
+            deathnoteGray: '#64748b',
+          },
+          animation: {
+            'portal-spin': 'spin 18s linear infinite',
+            'portal-reverse': 'spin 12s linear infinite reverse',
+            'float-gentle': 'float 3.5s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+            'sparkle': 'sparkle 1.8s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+              '50%': { opacity: '1', transform: 'scale(1.04)' },
+            },
+            sparkle: {
+              '0%, 100%': { opacity: '0.3', transform: 'scale(0.8)' },
+              '50%': { opacity: '1', transform: 'scale(1.2)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 50% 15%, #25123d 0%, #0c0817 55%, #05040a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #f8fafc;
+    }
+
+    .font-cute {
+      font-family: 'Fredoka', cursive;
+    }
+
+    /* Mystic Sling Ring Portal Sparks */
+    .sling-portal {
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.15) 0%, rgba(245, 158, 11, 0.25) 50%, rgba(217, 119, 6, 0) 70%);
+      box-shadow: 0 0 70px rgba(245, 158, 11, 0.5), inset 0 0 50px rgba(251, 191, 36, 0.6);
+      border: 3px dashed #fbbf24;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(251, 191, 36, 0.4);
+      box-shadow: 0 15px 40px -5px rgba(245, 158, 11, 0.3);
+    }
+
+    .drawing-board {
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    /* Custom drawing canvas frame */
+    .magic-frame {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(16, 185, 129, 0.3), rgba(244, 114, 182, 0.3));
+      padding: 3px;
+      border-radius: 1.5rem;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-400 selection:text-black relative">
+
+  <!-- Background Animated Starfield -->
+  <canvas id="star-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-14 flex flex-col items-center">
+
+    <!-- Top Status Bar -->
+    <div class="w-full flex justify-between items-center mb-8 px-2">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-xs backdrop-blur-md text-amber-200 border border-amber-300/25 shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>Multiverse Coordinate: Sanctum of Love ❤️</span>
+      </div>
+      <button id="sound-btn" onclick="toggleSound()" class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold backdrop-blur text-amber-200 transition flex items-center gap-1.5 border border-white/10 active:scale-95">
+        <span id="sound-icon">🔔</span> <span id="sound-text">Sound Effects: On</span>
+      </button>
+    </div>
+
+    <!-- Hero Portal & Eye of Agamotto Section -->
+    <header class="text-center w-full flex flex-col items-center relative mb-14">
+      <div class="relative w-48 h-48 sm:w-60 sm:h-60 flex items-center justify-center my-4">
+        <!-- Mystic Rings -->
+        <div class="absolute inset-0 rounded-full sling-portal animate-portal-spin"></div>
+        <div class="absolute inset-3 rounded-full border-2 border-dotted border-amber-300/80 animate-portal-reverse"></div>
+        <div class="absolute inset-7 rounded-full border border-emerald-400/40"></div>
+
+        <!-- Eye of Agamotto Center -->
+        <div class="relative z-10 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-tr from-amber-600 via-emerald-600 to-amber-400 p-1 flex items-center justify-center shadow-2xl transform hover:scale-105 transition-all">
+          <div class="w-full h-full rounded-full bg-slate-950 flex flex-col items-center justify-center text-center p-3">
+            <span class="text-3xl sm:text-4xl animate-bounce">⏳</span>
+            <span class="text-[11px] uppercase tracking-wider font-extrabold text-emerald-400 mt-1">Time Stone</span>
+            <span class="text-[9px] text-slate-400 font-mono">SANCTUM 616</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="inline-block px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 border border-emerald-400/30">
+        ✨ A Mystic Apology Across 14,000,605 Timelines
+      </div>
+
+      <h1 class="font-cute text-3xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-pink-200 to-emerald-300 drop-shadow-sm mb-4 leading-tight">
+        I'm So Sorry, My Universe ❤️
+      </h1>
+
+      <p class="text-base sm:text-lg max-w-xl text-slate-300 leading-relaxed font-normal px-2">
+        I consulted the Sorcerer Supreme and peered through <strong class="text-amber-300 underline decoration-amber-400/50">14,000,605 alternate futures</strong>... and in every single one, being without your sweet smile is my biggest regret.
+      </p>
+
+      <!-- Time Stone Rewind Interactive Button -->
+      <div class="mt-7 flex flex-col items-center">
+        <button id="time-stone-btn" onclick="triggerTimeStoneRewind()" class="group relative px-7 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 font-cute text-base font-bold text-slate-950 hover:brightness-110 active:scale-95 transition shadow-lg shadow-emerald-500/30 flex items-center gap-2.5">
+          <span class="text-xl">🌀</span>
+          <span>Use Time Stone to Rewind My Mistake!</span>
+          <span class="group-hover:rotate-180 transition-transform duration-500">✨</span>
+        </button>
+        <div id="timestone-box" class="hidden mt-4 p-4 rounded-2xl bg-emerald-950/60 border border-emerald-400/40 text-emerald-100 max-w-md text-sm text-center shadow-lg">
+          <p class="font-cute text-base text-emerald-300 font-bold mb-1">Time Reversed Successfully! ⏳💫</p>
+          <p class="text-xs text-slate-200">The spell rewound the clock to before I acted like a silly dummy. You now hold 100% cuddle rights and infinite apologies.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- The Anime Apology Council -->
+    <div class="w-full mb-14">
+      <div class="text-center mb-8">
+        <h2 class="font-cute text-2xl sm:text-3xl font-bold text-amber-200 flex items-center justify-center gap-2">
+          <span>⛩️</span> The Anime Apology Council
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Special delegates dispatched across anime dimensions to seek your pardon</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Card 1: Zenitsu Agatsuma (Demon Slayer) -->
+        <div id="zenitsu-card" class="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between border-t-2 border-t-amber-400/80 transition-all duration-300">
+          <div class="absolute -top-6 -right-6 text-7xl opacity-15 pointer-events-none select-none">⚡</div>
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span id="zenitsu-emoji" class="text-3xl p-2.5 rounded-xl bg-amber-400/20 border border-amber-400/40 transition-transform">😭⚡</span>
+              <div>
+                <h3 class="font-cute text-xl font-bold text-amber-300">Zenitsu Agatsuma</h3>
+                <p class="text-xs text-amber-200/60">Demon Slayer • Thunder Breathing: Regret Form</p>
+              </div>
+            </div>
+            <p id="zenitsu-quote" class="text-slate-300 text-sm leading-relaxed mb-4">
+              <em>"WAAAAAHHH!! Please don't be mad at him!! Thunder Breathing, First Form: Apology Flash & Infinite Sobs! I swear he didn't mean to mess up, he loves you so much his heart is trembling!!"</em>
+            </p>
+          </div>
+          <button id="zenitsu-btn" onclick="comfortZenitsu()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-xs font-bold transition flex items-center justify-center gap-2 active:scale-95">
+            <span>🤲</span> <span id="zenitsu-btn-text">Comfort the Crying Zenitsu (Give Headpat)</span>
+          </button>
+        </div>
+
+        <!-- Card 2: L Lawliet (Death Note) -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between border-t-2 border-t-indigo-400/80">
+          <div class="absolute -top-6 -right-6 text-7xl opacity-15 pointer-events-none select-none">🍰</div>
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl p-2.5 rounded-xl bg-indigo-500/20 border border-indigo-400/40">🕵️‍♂️🍰</span>
+              <div>
+                <h3 class="font-cute text-xl font-bold text-indigo-300">L Lawliet</h3>
+                <p class="text-xs text-indigo-200/60">Death Note • Master Detective's Deduction</p>
+              </div>
+            </div>
+            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+              <em>"Crouching on my chair and holding this strawberry shortcake, my deductions reveal: there is a <strong>99.8% probability</strong> he made a silly blunder. However, there is a <strong>100% mathematical certainty</strong> that he adores you. Please accept this peace cake."</em>
+            </p>
+          </div>
+          <button onclick="playChime('sweet'); confetti({particleCount: 25, origin: {y: 0.6}})" class="w-full py-2.5 px-4 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/40 text-indigo-200 text-xs font-bold transition flex items-center justify-center gap-2 active:scale-95">
+            <span>🍰</span> Accept L's Peace Offering Cake
+          </button>
+        </div>
+
+        <!-- Card 3: Osamu Dazai (Bungo Stray Dogs) -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between border-t-2 border-t-amber-200/80">
+          <div class="absolute -top-6 -right-6 text-7xl opacity-15 pointer-events-none select-none">🩹</div>
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl p-2.5 rounded-xl bg-amber-600/20 border border-amber-400/40">🩹☕</span>
+              <div>
+                <h3 class="font-cute text-xl font-bold text-amber-200">Osamu Dazai</h3>
+                <p class="text-xs text-amber-200/60">Bungo Stray Dogs • Armed Detective Agency</p>
+              </div>
+            </div>
+            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+              <em>"A dramatic double suicide? Bah, no way! How about a double dessert date with you instead? Life is far too precious and sweet to spend even a single second in a timeline where you are frowning!"</em>
+            </p>
+          </div>
+          <button onclick="playChime('dazai'); spawnHearts()" class="w-full py-2.5 px-4 rounded-xl bg-amber-300/20 hover:bg-amber-300/30 border border-amber-300/40 text-amber-100 text-xs font-bold transition flex items-center justify-center gap-2 active:scale-95">
+            <span>☕</span> Agree to Sweet Coffee & Cuddles
+          </button>
+        </div>
+
+        <!-- Card 4: Doctor Strange Multiverse Oath -->
+        <div class="glass-card rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between border-t-2 border-t-emerald-400/80">
+          <div class="absolute -top-6 -right-6 text-7xl opacity-15 pointer-events-none select-none">✨</div>
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40">🔮🧙‍♂️</span>
+              <div>
+                <h3 class="font-cute text-xl font-bold text-emerald-300">Doctor Strange</h3>
+                <p class="text-xs text-emerald-200/60">Marvel • Master of the Mystic Arts</p>
+              </div>
+            </div>
+            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+              <em>"By the hoary hosts of Hoggoth! I have anchored our timeline together. No matter what spells or chaos erupt across the multiverse, my devotion to you is unbroken and eternal."</em>
+            </p>
+          </div>
+          <button onclick="playChime('portal'); triggerPortalSparks()" class="w-full py-2.5 px-4 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-200 text-xs font-bold transition flex items-center justify-center gap-2 active:scale-95">
+            <span>✨</span> Spin Mystic Sling Ring
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Redeemable Apology Coupons -->
+    <section class="w-full mb-14">
+      <div class="text-center mb-6">
+        <h2 class="font-cute text-2xl sm:text-3xl font-bold text-amber-200 flex items-center justify-center gap-2">
+          <span>🎟️</span> Redeemable Peace Offerings
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Click to claim! Valid for eternity across every parallel dimension.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        <!-- Coupon 1 -->
+        <div id="coupon-1" onclick="redeemCoupon('coupon-1', 'Boba & Shortcake Feasts')" class="cursor-pointer glass-card p-5 rounded-2xl border-dashed border-2 border-pink-400/40 hover:border-pink-400 hover:scale-102 transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-start justify-between mb-2">
+              <span class="text-3xl">🍰🧋</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-pink-500/30 text-pink-300 border border-pink-400/20">L's Treaty</span>
+            </div>
+            <h4 class="font-cute text-lg font-bold text-pink-200 mt-1">Strawberry Shortcake & Boba</h4>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Immediate delivery or café run for your favorite pastries and drinks, entirely on me!</p>
+          </div>
+          <div class="mt-4 text-xs font-bold text-pink-300 coupon-status flex items-center gap-1">
+            <span>Tap to Redeem</span> <span>→</span>
+          </div>
+        </div>
+
+        <!-- Coupon 2 -->
+        <div id="coupon-2" onclick="redeemCoupon('coupon-2', 'Anime Marathon Pass')" class="cursor-pointer glass-card p-5 rounded-2xl border-dashed border-2 border-amber-400/40 hover:border-amber-400 hover:scale-102 transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-start justify-between mb-2">
+              <span class="text-3xl">🍿📺</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/30 text-amber-300 border border-amber-400/20">Cozy Time</span>
+            </div>
+            <h4 class="font-cute text-lg font-bold text-amber-200 mt-1">Anime & Movie Marathon</h4>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">You control the watchlist, the snacks, and the blanket fortress. Zero complaints guaranteed.</p>
+          </div>
+          <div class="mt-4 text-xs font-bold text-amber-300 coupon-status flex items-center gap-1">
+            <span>Tap to Redeem</span> <span>→</span>
+          </div>
+        </div>
+
+        <!-- Coupon 3 -->
+        <div id="coupon-3" onclick="redeemCoupon('coupon-3', 'Infinite Hugs & Headpats')" class="cursor-pointer glass-card p-5 rounded-2xl border-dashed border-2 border-emerald-400/40 hover:border-emerald-400 hover:scale-102 transition flex flex-col justify-between group">
+          <div>
+            <div class="flex items-start justify-between mb-2">
+              <span class="text-3xl">🧸💖</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/30 text-emerald-300 border border-emerald-400/20">Unlimited</span>
+            </div>
+            <h4 class="font-cute text-lg font-bold text-emerald-200 mt-1">Infinite Hugs & Headpats</h4>
+            <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">Whenever you feel stressed, tired, or need warmth. Unlimited redeems forever and ever.</p>
+          </div>
+          <div class="mt-4 text-xs font-bold text-emerald-300 coupon-status flex items-center gap-1">
+            <span>Tap to Redeem</span> <span>→</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- "Do You Forgive Me?" Mini-Game Section -->
+    <section id="forgive-section" class="w-full glass-card rounded-3xl p-8 sm:p-10 text-center relative border border-amber-400/30 shadow-2xl mb-14">
+      <span class="inline-block text-4xl mb-2 animate-bounce">💖</span>
+      <h2 class="font-cute text-2xl sm:text-4xl font-extrabold text-white mb-2">
+        Do You Forgive Your Sorcerer?
+      </h2>
+      <p class="text-slate-300 text-sm max-w-md mx-auto mb-8">
+        There are infinite realities across the multiverse, but only one girl whose happiness means everything to me.
+      </p>
+
+      <!-- Buttons Arena -->
+      <div id="decision-arena" class="relative min-h-[120px] flex items-center justify-center gap-6">
+
+        <!-- Glowing YES Button -->
+        <button id="yes-btn" onclick="celebrateForgiveness()" class="px-8 py-4 rounded-2xl font-cute text-lg sm:text-xl font-bold text-slate-950 bg-gradient-to-r from-amber-400 via-yellow-300 to-pink-400 shadow-xl shadow-yellow-500/40 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center gap-2 z-20">
+          <span>YES, of course! ❤️</span>
+        </button>
+
+        <!-- Runaway NO Button -->
+        <button id="no-btn" onmouseenter="dodgeButton()" onclick="dodgeButton()" class="px-6 py-3.5 rounded-2xl font-cute text-sm sm:text-base font-semibold text-rose-300 bg-rose-950/60 border border-rose-500/50 hover:bg-rose-900/60 z-10 transition-all select-none">
+          No 😤
+        </button>
+      </div>
+
+      <!-- Success Notification Box -->
+      <div id="forgiveness-result" class="hidden mt-6 p-6 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 text-emerald-100 animate-fade-in">
+        <h3 class="font-cute text-2xl sm:text-3xl font-bold text-amber-300 mb-2">🎉 TIMELINE RESTORED! THANK YOU! 🎉</h3>
+        <p class="text-sm max-w-lg mx-auto text-slate-200">
+          Zenitsu wiped away his tears, L sliced an extra strawberry shortcake, Dazai smiled, and Doctor Strange sealed the breach with love. Now, look below for the grand finale! 👇
+        </p>
+      </div>
+    </section>
+
+    <!-- GRAND FINALE: Virtual Drawing Date Invitation -->
+    <section id="drawing-date-section" class="w-full opacity-80 transition-opacity duration-700">
+      <div class="magic-frame">
+        <div class="glass-card rounded-[1.4rem] p-6 sm:p-10 bg-slate-950/90 flex flex-col items-center">
+
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/20 text-pink-300 text-xs font-bold border border-pink-400/30 mb-3">
+            <span>🎨✨</span> The Grand Finale Invitation
+          </div>
+
+          <h2 class="font-cute text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-amber-200 to-emerald-300 text-center mb-2">
+            Will You Join Me for a Virtual Drawing Date? 🖌️💌
+          </h2>
+
+          <p class="text-slate-300 text-sm sm:text-base max-w-xl text-center mb-6 leading-relaxed">
+            Grab your stylus or tablet, hop into your comfiest oversized hoodie, get on a voice call with me, and let’s doodle funny anime sketches, cute characters, and silly memories together! Test out the mini canvas right here:
+          </p>
+
+          <!-- Interactive Mini Doodle Board -->
+          <div class="w-full max-w-2xl bg-slate-900/90 rounded-2xl p-4 border border-white/10 shadow-2xl flex flex-col items-center">
+            
+            <!-- Canvas Toolbar -->
+            <div class="w-full flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/10 mb-3">
+              
+              <!-- Color Palette -->
+              <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 font-bold mr-1">Palette:</span>
+                <button onclick="setBrushColor('#10b981')" class="color-picker-btn w-6 h-6 rounded-full bg-emerald-500 ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Time Stone Emerald"></button>
+                <button onclick="setBrushColor('#f59e0b')" class="color-picker-btn w-6 h-6 rounded-full bg-amber-500 ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Mystic Sling Gold"></button>
+                <button onclick="setBrushColor('#f472b6')" class="color-picker-btn w-6 h-6 rounded-full bg-pink-400 ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Chibi Pastel Pink"></button>
+                <button onclick="setBrushColor('#a855f7')" class="color-picker-btn w-6 h-6 rounded-full bg-purple-500 ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Sanctum Purple"></button>
+                <button onclick="setBrushColor('#ffffff')" class="color-picker-btn w-6 h-6 rounded-full bg-white ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Pure White"></button>
+                <button onclick="setBrushColor('#0f172a')" class="color-picker-btn w-6 h-6 rounded-full bg-slate-900 border border-slate-600 ring-2 ring-transparent transition hover:scale-110 active:scale-95" title="Eraser / Dark"></button>
+              </div>
+
+              <!-- Controls: Brush size & Clear -->
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-slate-400 font-bold">Size:</span>
+                  <input id="brush-size" type="range" min="2" max="24" value="5" class="w-20 accent-pink-400 cursor-pointer" oninput="updateBrushSize(this.value)">
+                </div>
+
+                <button onclick="clearCanvas()" class="px-3 py-1 text-xs font-bold rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10 transition active:scale-95">
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Drawing Canvas Element -->
+            <div class="w-full relative overflow-hidden rounded-xl bg-[#090b14] border border-white/15">
+              <canvas id="doodle-canvas" width="600" height="320" class="w-full h-[260px] sm:h-[320px] drawing-board"></canvas>
+              <div id="canvas-placeholder-text" class="absolute inset-0 flex items-center justify-center pointer-events-none text-slate-500 text-xs sm:text-sm font-cute italic">
+                ✨ Draw a heart or doodle here to test our date canvas! ✨
+              </div>
+            </div>
+
+            <div class="w-full flex justify-between items-center mt-3 text-[11px] text-slate-400">
+              <span>Supports touch stylus, iPad & mouse drawing</span>
+              <button onclick="saveDoodle()" class="text-pink-300 hover:text-pink-200 underline">Download our doodle 💾</button>
+            </div>
+          </div>
+
+          <!-- Big Accept Invitation Button -->
+          <div class="mt-8 flex flex-col items-center">
+            <button id="accept-date-btn" onclick="acceptDrawingDate()" class="px-9 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-400 to-amber-400 text-slate-950 font-cute text-lg sm:text-xl font-bold hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-pink-500/30 flex items-center gap-3">
+              <span>Accept the Drawing Date! 🖌️💌</span>
+            </button>
+            <p class="text-xs text-pink-200/70 mt-2 font-mono">Guaranteed 100% cozy, funny & snack-filled time</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for Date Acceptance -->
+    <div id="date-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+      <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-md w-full border border-pink-400/40 text-center shadow-2xl relative animate-scale-up">
+        <span class="text-5xl mb-3 inline-block animate-bounce">🎨✨</span>
+        <h3 class="font-cute text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-amber-200 to-emerald-300 mb-2">
+          DATE LOCKED IN ACROSS THE MULTIVERSE!
+        </h3>
+        <p class="text-slate-200 text-sm leading-relaxed mb-6">
+          Pack your favorite drawing apps, cozy socks, and snacks! Doctor Strange just created a portal straight into our chill art session. I cannot wait to laugh and draw silly things with you! ❤️
+        </p>
+
+        <div class="p-4 rounded-xl bg-white/5 border border-white/10 mb-6 text-left text-xs space-y-1.5 text-slate-300">
+          <div>📌 <strong>Activity:</strong> Virtual Canvas Doodle & Anime Binge Date</div>
+          <div>☕ <strong>Requirement:</strong> Warm beverage & comfy clothes</div>
+          <div>💌 <strong>Special Status:</strong> You are cherished beyond measure</div>
+        </div>
+
+        <button onclick="closeModal()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-pink-500 text-slate-950 font-cute text-base font-bold transition active:scale-95 shadow-md">
+          I'm Ready! See You on the Call 🥰
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-14 text-center text-xs text-slate-500 font-mono">
+      Crafted with pure love, Sling Rings & endless anime marathons ✨
+    </footer>
+
+  </main>
+
+  <script>
+    /* -------------------------------------------------------------
+       AUDIO SYNTHESIZER (Web Audio API - self contained)
+    ------------------------------------------------------------- */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('sound-icon');
+      const text = document.getElementById('sound-text');
+      if (soundEnabled) {
+        icon.innerText = '🔔';
+        text.innerText = 'Sound Effects: On';
+        playTone(523.25, 0.1, 'sine');
+      } else {
+        icon.innerText = '🔕';
+        text.innerText = 'Sound Effects: Off';
+      }
+    }
+
+    function playTone(freq, duration = 0.2, type = 'sine', decay = true) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        if (decay) {
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        }
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio blocked or unsupported:', e);
+      }
+    }
+
+    function playChime(theme) {
+      if (!soundEnabled) return;
+      if (theme === 'zenitsu') {
+        playTone(659.25, 0.15, 'sawtooth');
+        setTimeout(() => playTone(880.00, 0.25, 'triangle'), 90);
+      } else if (theme === 'sweet') {
+        playTone(587.33, 0.15, 'sine');
+        setTimeout(() => playTone(783.99, 0.15, 'sine'), 100);
+        setTimeout(() => playTone(1046.50, 0.3, 'sine'), 200);
+      } else if (theme === 'dazai') {
+        playTone(392.00, 0.2, 'triangle');
+        setTimeout(() => playTone(493.88, 0.2, 'triangle'), 90);
+        setTimeout(() => playTone(587.33, 0.3, 'sine'), 180);
+      } else if (theme === 'portal') {
+        playTone(440, 0.15, 'sine');
+        setTimeout(() => playTone(554.37, 0.15, 'sine'), 70);
+        setTimeout(() => playTone(659.25, 0.35, 'sine'), 140);
+      } else if (theme === 'fanfare') {
+        playTone(523.25, 0.15, 'triangle');
+        setTimeout(() => playTone(659.25, 0.15, 'triangle'), 120);
+        setTimeout(() => playTone(783.99, 0.15, 'triangle'), 240);
+        setTimeout(() => playTone(1046.50, 0.45, 'triangle'), 360);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       TIME STONE REWIND INTERACTION
+    ------------------------------------------------------------- */
+    function triggerTimeStoneRewind() {
+      playChime('portal');
+      const box = document.getElementById('timestone-box');
+      box.classList.remove('hidden');
+
+      confetti({
+        particleCount: 60,
+        spread: 80,
+        origin: { y: 0.35 },
+        colors: ['#10b981', '#34d399', '#f59e0b', '#fbbf24']
+      });
+    }
+
+    /* -------------------------------------------------------------
+       ZENITSU COMFORT
+    ------------------------------------------------------------- */
+    let zenitsuCalmed = false;
+    function comfortZenitsu() {
+      playChime('zenitsu');
+      const emoji = document.getElementById('zenitsu-emoji');
+      const quote = document.getElementById('zenitsu-quote');
+      const btnText = document.getElementById('zenitsu-btn-text');
+
+      if (!zenitsuCalmed) {
+        emoji.innerText = '⚡🥰';
+        quote.innerHTML = '<em>"Sniffle... sniffle... REALLY?! You are giving him another chance?! You are an absolute angel! I can finally stop hyperventilating!"</em>';
+        btnText.innerText = 'Zenitsu is soothed & happy! ❤️';
+        zenitsuCalmed = true;
+        confetti({ particleCount: 30, spread: 60, origin: { y: 0.5 } });
+      } else {
+        emoji.innerText = '⚡😴';
+        quote.innerHTML = '<em>"Zenitsu fell peacefully asleep after seeing how wonderful and kind-hearted you are."</em>';
+        btnText.innerText = 'Zenitsu is happily snoozing 💤';
+      }
+    }
+
+    function triggerPortalSparks() {
+      confetti({
+        particleCount: 40,
+        spread: 90,
+        origin: { y: 0.55 },
+        colors: ['#f59e0b', '#fbbf24', '#fef08a']
+      });
+    }
+
+    function spawnHearts() {
+      confetti({
+        particleCount: 30,
+        spread: 70,
+        origin: { y: 0.55 },
+        colors: ['#f472b6', '#fb7185', '#fda4af']
+      });
+    }
+
+    /* -------------------------------------------------------------
+       REDEEMABLE COUPONS
+    ------------------------------------------------------------- */
+    function redeemCoupon(id, title) {
+      playChime('sweet');
+      const card = document.getElementById(id);
+      const status = card.querySelector('.coupon-status');
+
+      card.classList.remove('border-dashed');
+      card.classList.add('border-solid', 'bg-emerald-950/40', 'border-emerald-400');
+      status.innerHTML = '<span>✅ Claimed! Ready when you are ❤️</span>';
+      status.classList.remove('text-pink-300', 'text-amber-300');
+      status.classList.add('text-emerald-300');
+
+      confetti({
+        particleCount: 35,
+        spread: 50,
+        origin: { y: 0.65 }
+      });
+    }
+
+    /* -------------------------------------------------------------
+       RUNAWAY "NO" BUTTON & FORGIVENESS
+    ------------------------------------------------------------- */
+    const runawayPhrases = [
+      "No 😤",
+      "Doctor Strange blocked this portal!",
+      "Zenitsu started sobbing! 😱",
+      "L deducted: 0% chance of 'No'",
+      "Dazai bandaged this choice!",
+      "Sling ring malfunction! 💫",
+      "Wrong timeline! Pick Yes ❤️",
+      "Error: 'No' does not exist here"
+    ];
+    let phraseIndex = 0;
+
+    function dodgeButton() {
+      playTone(320, 0.08, 'square');
+      const noBtn = document.getElementById('no-btn');
+      const arena = document.getElementById('decision-arena');
+      const rect = arena.getBoundingClientRect();
+
+      const maxX = (rect.width / 2) - 60;
+      const maxY = 40;
+
+      const randomX = (Math.random() * (maxX * 2)) - maxX;
+      const randomY = (Math.random() * (maxY * 2)) - maxY;
+
+      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      phraseIndex = (phraseIndex + 1) % runawayPhrases.length;
+      noBtn.innerText = runawayPhrases[phraseIndex];
+    }
+
+    function celebrateForgiveness() {
+      playChime('fanfare');
+
+      document.getElementById('no-btn').style.display = 'none';
+      const yesBtn = document.getElementById('yes-btn');
+      yesBtn.classList.add('scale-105');
+      yesBtn.innerText = "Forgiven Forever! 💖";
+
+      document.getElementById('forgiveness-result').classList.remove('hidden');
+
+      // Highlight the drawing date finale
+      const drawingSec = document.getElementById('drawing-date-section');
+      drawingSec.classList.remove('opacity-80');
+      drawingSec.classList.add('opacity-100');
+      drawingSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Multiverse Confetti
+      const duration = 2.5 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+        const particleCount = 40 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: 0.2, y: 0.6 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: 0.8, y: 0.6 } }));
+      }, 250);
+    }
+
+    /* -------------------------------------------------------------
+       VIRTUAL DRAWING DATE CANVAS SYSTEM
+    ------------------------------------------------------------- */
+    const doodleCanvas = document.getElementById('doodle-canvas');
+    const doodleCtx = doodleCanvas.getContext('2d');
+    let isDrawing = false;
+    let currentColor = '#10b981';
+    let currentBrushSize = 5;
+    let hasDrawn = false;
+
+    // Fix high DPI canvas scaling
+    function resizeDoodleCanvas() {
+      const rect = doodleCanvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      
+      // Save canvas state if user already started
+      let tempCanvas = document.createElement('canvas');
+      tempCanvas.width = doodleCanvas.width;
+      tempCanvas.height = doodleCanvas.height;
+      let tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(doodleCanvas, 0, 0);
+
+      doodleCanvas.width = rect.width * dpr;
+      doodleCanvas.height = rect.height * dpr;
+      doodleCtx.scale(dpr, dpr);
+
+      // Restore
+      doodleCtx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+      setupCanvasContext();
+    }
+
+    function setupCanvasContext() {
+      doodleCtx.lineCap = 'round';
+      doodleCtx.lineJoin = 'round';
+      doodleCtx.strokeStyle = currentColor;
+      doodleCtx.lineWidth = currentBrushSize;
+    }
+
+    function getCanvasCoordinates(e) {
+      const rect = doodleCanvas.getBoundingClientRect();
+      let clientX, clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      e.preventDefault();
+      isDrawing = true;
+      const pos = getCanvasCoordinates(e);
+      doodleCtx.beginPath();
+      doodleCtx.moveTo(pos.x, pos.y);
+
+      if (!hasDrawn) {
+        hasDrawn = true;
+        const hint = document.getElementById('canvas-placeholder-text');
+        if (hint) hint.style.display = 'none';
+      }
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const pos = getCanvasCoordinates(e);
+      doodleCtx.lineTo(pos.x, pos.y);
+      doodleCtx.stroke();
+    }
+
+    function stopDrawing() {
+      if (!isDrawing) return;
+      isDrawing = false;
+      doodleCtx.closePath();
+    }
+
+    // Canvas Listeners
+    doodleCanvas.addEventListener('mousedown', startDrawing);
+    doodleCanvas.addEventListener('mousemove', draw);
+    doodleCanvas.addEventListener('mouseup', stopDrawing);
+    doodleCanvas.addEventListener('mouseleave', stopDrawing);
+
+    doodleCanvas.addEventListener('touchstart', startDrawing, { passive: false });
+    doodleCanvas.addEventListener('touchmove', draw, { passive: false });
+    doodleCanvas.addEventListener('touchend', stopDrawing);
+
+    function setBrushColor(color) {
+      currentColor = color;
+      doodleCtx.strokeStyle = currentColor;
+      playTone(480, 0.05, 'sine');
+    }
+
+    function updateBrushSize(val) {
+      currentBrushSize = val;
+      doodleCtx.lineWidth = currentBrushSize;
+    }
+
+    function clearCanvas() {
+      const rect = doodleCanvas.getBoundingClientRect();
+      doodleCtx.clearRect(0, 0, rect.width, rect.height);
+      const hint = document.getElementById('canvas-placeholder-text');
+      if (hint) hint.style.display = 'flex';
+      hasDrawn = false;
+      playTone(300, 0.1, 'sine');
+    }
+
+    function saveDoodle() {
+      const link = document.createElement('a');
+      link.download = 'our-mystic-doodle.png';
+      link.href = doodleCanvas.toDataURL();
+      link.click();
+    }
+
+    /* -------------------------------------------------------------
+       DATE INVITATION ACCEPTANCE MODAL
+    ------------------------------------------------------------- */
+    function acceptDrawingDate() {
+      playChime('fanfare');
+      const modal = document.getElementById('date-modal');
+      modal.classList.remove('hidden');
+
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.5 },
+        colors: ['#f472b6', '#10b981', '#fbbf24', '#c084fc']
+      });
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('date-modal');
+      modal.classList.add('hidden');
+      playTone(523.25, 0.1, 'sine');
+    }
+
+    /* -------------------------------------------------------------
+       BACKGROUND ANIMATED STARFIELD
+    ------------------------------------------------------------- */
+    const starCanvas = document.getElementById('star-canvas');
+    const starCtx = starCanvas.getContext('2d');
+    let stars = [];
+
+    function resizeBackground() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+      initStars();
+    }
+
+    function initStars() {
+      stars = [];
+      const numStars = Math.floor((starCanvas.width * starCanvas.height) / 5500);
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          radius: Math.random() * 1.5 + 0.4,
+          color: ['#fbbf24', '#f472b6', '#34d399', '#ffffff'][Math.floor(Math.random() * 4)],
+          alpha: Math.random(),
+          speed: Math.random() * 0.015 + 0.005
+        });
+      }
+    }
+
+    function drawStars() {
+      starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      for (let star of stars) {
+        star.alpha += star.speed;
+        const currentAlpha = Math.abs(Math.sin(star.alpha));
+        starCtx.beginPath();
+        starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        starCtx.fillStyle = star.color;
+        starCtx.globalAlpha = currentAlpha * 0.8;
+        starCtx.fill();
+      }
+      starCtx.globalAlpha = 1.0;
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeBackground();
+      resizeDoodleCanvas();
+    });
+
+    window.onload = function() {
+      resizeBackground();
+      drawStars();
+      resizeDoodleCanvas();
+      setupCanvasContext();
+    };
+  </script>
+</body>
+</html>
